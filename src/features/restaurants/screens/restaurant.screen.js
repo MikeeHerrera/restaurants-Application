@@ -1,15 +1,16 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
-import { StatusBar as statusB } from 'expo-status-bar';
 import { Searchbar } from 'react-native-paper';
 import { RestaurantInfo } from '../components/restaurant-info.component';
 import styled from  "styled-components/native";
 
 const dispositivo = Platform.OS == 'android';
-
+const b = StatusBar.currentHeight
+console.log(StatusBar.currentHeight)
 const SafeArea =  styled(SafeAreaView)`
 flex:1;
-${StatusBar.currentHeight} && 'margin-top': ${StatusBar.currentHeight}px`;
+margin-top:${StatusBar.currentHeight} 
+`;
 
 const SearchContainer = styled(View)`
 padding:16px;
