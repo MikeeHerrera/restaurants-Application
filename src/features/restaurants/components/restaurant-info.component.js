@@ -1,9 +1,7 @@
 import React from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, View, Image } from "react-native";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
-import { SvgXml } from "react-native-svg";
-import star from "../../../../assets/star";
 
 const Title = styled(Text)`
   color: ${(props) => props.theme.colors.ui.primary};
@@ -13,7 +11,7 @@ const Title = styled(Text)`
 
 const RestaurantCard = styled(Card)`
   background-color: white;
-  padding: 16px;
+margin:10px;
   height: auto;
 `;
 
@@ -26,17 +24,26 @@ const Info = styled(View)`
 `;
 
 const Address = styled(Text)`
+
   padding: 5px;
   color: black;
   font-family: ${(props) => props.theme.fonts.heading};
 `;
 const StartDiv = styled(View)`
   padding: 5px;
-
   display: flex;
   flex-flow: row;
+  align-items: center;
 `;
 
+const IsOpen = styled(View)`
+  width:70%;
+  display:flex;
+  alignItems:flex-end;
+`;
+const IsOpenIMG = styled(Image)`
+
+`;
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {
     name = "Some nice restaurant",
@@ -47,14 +54,14 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     address = "some random street",
     isOpenNow = true,
     rating = 4,
-    isClosedTemporarily,
+    isClosedTemporarily = false,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.ceil(rating)));
+
   return (
     <RestaurantCard>
       <RestaurantCardCover source={{ uri: photos[0] }} />
-
       <Info>
         <Title> {name}</Title>
         <StartDiv>
@@ -66,8 +73,22 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
               style={{ width: 20, height: 20 }}
             />
           ))}
+          <IsOpen>
+             {   isOpenNow && !isClosedTemporarily?<IsOpenIMG
+                source={{
+                  uri: "http://buildaprofitablelist.com/wp-content/uploads/2013/05/open-sign.png",
+                }}
+                style={{ width: 30, height: 30 }}
+              ></IsOpenIMG> :
+              <IsOpenIMG
+                source={{
+                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7e-vGbCaGP4UrKfy4C1v9bfsZlKKuYPtCo75NvA1Of_YtdZrfuG5B8BOrGeQY8RivK1k&usqp=CAU",
+                }}
+                style={{ width: 30, height: 30 }}
+              ></IsOpenIMG>
+              }
+          </IsOpen>
         </StartDiv>
-
         <Address>{address}</Address>
       </Info>
     </RestaurantCard>
