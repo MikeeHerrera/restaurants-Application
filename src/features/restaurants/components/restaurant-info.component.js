@@ -45,6 +45,7 @@ const IsOpenIMG = styled(Image)`
 
 `;
 export const RestaurantInfo = ({ restaurant = {} }) => {
+  console.log(restaurant)
   const {
     name = "Some nice restaurant",
     icon,

@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { ThemeProvider } from "styled-components/native";
 import { Home } from "./src/features/restaurants/screens/restaurant.screen";
@@ -11,11 +12,11 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
+import{RestaurantContextProvider} from "./src/services/restaurants/restaurants.context"
 const Tab = createBottomTabNavigator();
 const Map = () => <View></View>;
 const Settings = () => <View></View>;
-
 export default function App() {
   let [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -31,13 +32,14 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
+       <RestaurantContextProvider>
+       <NavigationContainer>
           <Tab.Navigator
            screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
               let iconName;
               if (route.name === 'Home') {
-                iconName ='restaurant'
+                iconName ='map'
               } else if (route.name === 'Settings') {
                 iconName = 'settings';
               }else if(route.name === 'Map' ){
@@ -55,6 +57,10 @@ export default function App() {
             <Tab.Screen name="Settings" component={Settings} />
           </Tab.Navigator>
         </NavigationContainer>
+
+         </RestaurantContextProvider>
+     
+      
       </ThemeProvider>
     </>
   );
