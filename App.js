@@ -13,7 +13,8 @@ import {
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
-import{RestaurantContextProvider} from "./src/services/restaurants/restaurants.context"
+import{RestaurantContextProvider} from "./src/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "./src/services/locations/locations.context";
 const Tab = createBottomTabNavigator();
 const Map = () => <View></View>;
 const Settings = () => <View></View>;
@@ -32,7 +33,8 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-       <RestaurantContextProvider>
+        <LocationContextProvider>
+        <RestaurantContextProvider>
        <NavigationContainer>
           <Tab.Navigator
            screenOptions={({ route }) => ({
@@ -59,6 +61,8 @@ export default function App() {
         </NavigationContainer>
 
          </RestaurantContextProvider>
+        </LocationContextProvider>
+   
      
       
       </ThemeProvider>

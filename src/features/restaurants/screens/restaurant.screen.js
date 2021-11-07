@@ -5,6 +5,7 @@ import { RestaurantInfo } from '../components/restaurant-info.component';
 import styled from  "styled-components/native";
 import { RestaurantContext } from '../../../services/restaurants/restaurants.context';
 import { ActivityIndicator, Colors } from 'react-native-paper';
+import { Search } from '../components/search.component';
 
 const dispositivo = Platform.OS == 'android';
 const b = StatusBar.currentHeight
@@ -38,10 +39,7 @@ export const Home = () =>
  return (
  <>
 
-    <SearchContainer >
-    <Searchbar
-      placeholder="Search"/> 
-     </SearchContainer>
+    <Search/>
      <FlatList
         data={restaurants}
         renderItem={ ({item})=> <RestaurantInfo restaurant={item}/>}
